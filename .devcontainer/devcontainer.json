@@ -1,0 +1,67 @@
+{
+	"name": "glim-to-hdmapping",
+	"dockerFile": "Dockerfile",
+	"workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
+    "workspaceFolder": "${localWorkspaceFolder}",
+	"remoteUser": "${localEnv:USER}",
+    "updateRemoteUserUID": false,
+	"build": {
+		"args": {
+			"WORKSPACES_DIR": "${localEnv:HOME}/jetbot/glim-to-hdmapping",
+			"WORKSPACE": "${containerWorkspaceFolder}",
+            "REMOTE_USER": "${localEnv:USER}",
+            "REMOTE_UID": "${localEnv:UID:1001}",
+            "REMOTE_GID": "${localEnv:GID:1001}",
+			"DOMAIN_ID": "24"
+		}
+	},
+	"runArgs": [
+		"--network=host",
+		"--privileged",
+        "--runtime=nvidia",
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
+		"--volume=${localEnv:HOME}/.Xauthority:${localEnv:HOME}/.Xauthority:rw",
+		"--volume=/dev:/dev",
+		"--volume=${localEnv:HOME}/dev:${localEnv:HOME}/dev:rw",
+		"--volume=${localEnv:HOME}/jetbot:${localEnv:HOME}/jetbot:rw",
+		"--volume=/usr/share/bash-completion/bash_completion:/usr/share/bash-completion/bash_completion:rw",
+		"--volume=/etc/bash_completion:/etc/bash_completion:rw",
+		"--volume=${localEnv:HOME}/sdk:${localEnv:HOME}/sdk:rw",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=seccomp:unconfined",
+		"--security-opt=apparmor:unconfined"
+	],
+	"containerEnv": {
+		"NVIDIA_DRIVER_CAPABILITIES": "all",
+		"NVIDIA_VISIBLE_DEVICES": "all",
+		"QT_X11_NO_MITSHM": "1",
+		"DISPLAY": ":1",
+		"LIBGL_ALWAYS_INDIRECT": "0",
+		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "bash"
+					}
+				},
+				"terminal.integrated.defaultProfile.linux": "bash"
+			},
+			"extensions": [
+				"dotjoshjohnson.xml",
+				"ms-azuretools.vscode-docker",
+				"ms-python.python",
+				"llvm-vs-code-extensions.vscode-clangd",
+				"xaver.clang-format",
+				"redhat.vscode-yaml",
+				"smilerobotics.urdf",
+				"streetsidesoftware.code-spell-checker",
+				"twxs.cmake",
+				"yzhang.markdown-all-in-one",
+				"eamodio.gitlens"
+			]
+		}
+	}
+}

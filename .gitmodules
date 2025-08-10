@@ -1,0 +1,12 @@
+[submodule "src/glim"]
+	path = src/glim
+	url = https://github.com/koide3/glim.git
+[submodule "src/glim_ros2"]
+	path = src/glim_ros2
+	url = https://github.com/koide3/glim_ros2.git
+[submodule "src/glim-to-hdmapping/3rdparty/LASzip"]
+	path = src/glim-to-hdmapping/3rdparty/LASzip
+	url = https://github.com/LASzip/LASzip.git
+[submodule "src/livox_ros_driver2"]
+	path = src/livox_ros_driver2
+	url = https://github.com/Livox-SDK/livox_ros_driver2.git

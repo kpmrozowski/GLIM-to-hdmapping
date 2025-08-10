@@ -1,0 +1,8 @@
+.vscode/
+build-*/
+build/
+.cache/
+.clangd/
+out
+log/
+install/
