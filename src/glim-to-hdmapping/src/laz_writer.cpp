@@ -3,7 +3,7 @@
 #include <iostream>
 #include <limits>
 
-bool saveLaz(const std::string &filename, const std::vector<Point3Di> &points_global)
+bool laz::saveLaz(const std::string &filename, const std::vector<Point3Di> &points_global, const bool verbose)
 {
 
     constexpr float scale = 0.0001f; // one tenth of milimeter
@@ -45,7 +45,7 @@ bool saveLaz(const std::string &filename, const std::vector<Point3Di> &points_gl
         }
     }
 
-    std::cout << "processing: " << filename << "points " << points_global.size() << std::endl;
+    if (verbose) std::cout << "processing: " << filename << "points " << points_global.size() << std::endl;
 
     laszip_POINTER laszip_writer;
     if (laszip_create(&laszip_writer))
@@ -99,7 +99,7 @@ bool saveLaz(const std::string &filename, const std::vector<Point3Di> &points_gl
         return false;
     }
 
-    fprintf(stderr, "writing file '%s' %scompressed\n", filename.c_str(), (compress ? "" : "un"));
+    if (verbose) fprintf(stderr, "writing file '%s' %scompressed\n", filename.c_str(), (compress ? "" : "un"));
 
     // get a pointer to the point of the writer that we will populate and write
 
@@ -141,7 +141,7 @@ bool saveLaz(const std::string &filename, const std::vector<Point3Di> &points_gl
         return false;
     }
 
-    fprintf(stderr, "successfully written %ld points\n", (long)p_count);
+    if (verbose) fprintf(stderr, "successfully written %ld points\n", (long)p_count);
 
     // close the writer
 
@@ -159,6 +159,6 @@ bool saveLaz(const std::string &filename, const std::vector<Point3Di> &points_gl
         return false;
     }
 
-    std::cout << "exportLaz DONE" << std::endl;
+    if (verbose) std::cout << "exportLaz DONE" << std::endl;
     return true;
 }

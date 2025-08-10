@@ -31,6 +31,7 @@
 		"--security-opt=seccomp:unconfined",
 		"--security-opt=apparmor:unconfined"
 	],
+    "privileged": true,
 	"containerEnv": {
 		"NVIDIA_DRIVER_CAPABILITIES": "all",
 		"NVIDIA_VISIBLE_DEVICES": "all",

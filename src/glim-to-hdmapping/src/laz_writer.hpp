@@ -14,4 +14,6 @@ struct Point3Di
     int index_point;
 };
 
-bool saveLaz(const std::string &filename, const std::vector<Point3Di> &points_global);
+namespace laz {
+    bool saveLaz(const std::string &filename, const std::vector<Point3Di> &points_global, const bool verbose);
+}

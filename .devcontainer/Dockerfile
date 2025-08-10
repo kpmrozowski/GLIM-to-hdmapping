@@ -172,12 +172,22 @@ RUN git clone https://github.com/Livox-SDK/Livox-SDK2.git &&\
     cmake --build build &&\
     sudo cmake --build build -t install &&\
     cd - &&\
-    rm -rf Livox-SDK2 &&\
+    rm -rf Livox-SDK2
+
+# iridescence
+RUN git clone --recurse-submodules https://github.com/koide3/iridescence.git &&\
+    cd iridescence &&\
+    git checkout 666d10bbfdf6fed667f88ac21558cbbb1beee209 &&\
+    cmake -Bbuild -GNinja -DCMAKE_INSTALL_PREFIX=/usr &&\
+    cmake --build build &&\
+    sudo cmake --build build -t install &&\
+    cd - &&\
+    rm -rf iridescence &&\
     cd $HOME && rm -rf sdk
 
 RUN sudo apt update &&\
     sudo apt install -y \
- nlohmann-json3-dev clang-14 libomp-14-dev
+ nlohmann-json3-dev clang-14 libomp-14-dev clangd-14
 
 WORKDIR $HOME
 
